@@ -22,7 +22,7 @@ with open("pokemon_page.html", "w") as fichier:
 #  A revoir essayer avec une autre connexion
 
 #  Création de la table qui va stocker les données des pokemons
-'''
+
 cursor.execute("""CREATE TABLE IF NOT EXISTS t_pokedex ( id INT(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY(id),
 national_number VARCHAR(3) ,
 name varchar(30), 
@@ -39,7 +39,7 @@ speed int
 #  réinitialiser la table
 cursor.execute("""TRUNCATE TABLE t_pokedex;""")
 
-'''
+
 #  parcourir la page HTML pour récupérer les données des pokemon et les insérer dans la base de données
 with open("pokemon_page.html", "r") as html:
     soup=BeautifulSoup(html, "html.parser")
@@ -50,57 +50,59 @@ with open("pokemon_page.html", "r") as html:
         data_pokemon = []
         i = i+1
         numero = 0
+
         for l in link.find_all("td"):
             numero = numero + 1
+
             #  séparer les noms de type pokemon pour ceux en ont plusieurs
             if(numero == 3):
-                typepokemon = list(l.text)
-                print(typepokemon)
-                debut=typepokemon[0]
-                # typepokemon=typepokemon[-(len(typepokemon)-1):]
-                print(debut)
+                typepokemon = l.text
+                separer = False
+                tab_type = list(typepokemon)
 
-                print(typepokemon)
-                # print(type(typepokemon))
+                for lettre in tab_type[-(len(tab_type) - 1):]:
+                    if lettre.isupper():
+                        separer = True
+                        break
 
-                # for lettre in enumerate(typepokemon):
-                for lettre in enumerate(typepokemon[-(len(typepokemon) - 1):]):
-                    caractere = lettre[1]
-                    index = lettre[0]
+                if(separer):
 
-                    if(caractere.isupper()):
-                        # lettre = lettre + " "
-                        print(caractere)
-                        typepokemon[index+1] = " " + caractere
-                        print(typepokemon)
-                        print("\n\n")
-                        typepokemon = "".join(typepokemon)
-                        print(str(typepokemon))
+                    for lettre in enumerate(tab_type[-(len(tab_type) - 1):]):
+                        caractere = lettre[1]
+                        index = lettre[0]
 
-                # print("Les nom des types de pokemon:  " + l.text
+                        if(caractere.isupper()):
+                           tab_type[index+1] = " " + caractere
+
+                    typepokemon = "".join(tab_type)
+
                 data_pokemon.append(typepokemon)
-
-            data_pokemon.append(str(l.text).strip(" "))
+            else:
+                data_pokemon.append(str(l.text).strip(" "))
 
 
         # print(str("tableau N° " + str(i) + str(data_pokemon)) + " a une taille  de  " + str(len(data_pokemon)))
         # if taille != 10:
         #      print(str("tableau N° " + str(i) +  str(data_pokemon)) +" a une taille  de  " + str(taille))
 
-'''
+
         if(len(data_pokemon) > 0):
             cursor.execute(""" INSERT  INTO  `t_pokedex`(`national_number`, `name`, `type`, `total`, `hp`, `attack`, `defense`, `sp_atk`, `sp_def`,
                        `speed`)
            VALUES(%s, %s, %s, %s, %s, %s,%s, %s, %s, %s)""" , data_pokemon)
-'''
+
             # print(l.text)
            # print("\n")
-'''
+
     cnx.commit()
     cursor.close()
     cnx.close()
 
-'''
+
+
+
+
+
 
 
 
