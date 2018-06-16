@@ -1,0 +1,249 @@
+{"swagger": "1.0",
+  "info": {
+    "description": "c'est une application de gestion des pokémon. is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger_pokemon",
+
+    "contact": {
+      "email": "mail@mail.com."
+    },
+	"item": [
+		{
+			"name": "getall",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {"raw": "localhost:8000/gettall"
+				},
+				"description": "permet d'afficher l'ensemble des pokemons enregistrés dans la base"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8000/getone?id=",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/getone?id=",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"getone"
+					],
+					"query": [
+						{
+							"key": "id",
+							"required": true,
+							"type": "int"
+						}
+					]
+				},
+				"description": "permet d'afficher un pokemon dont l'id est passé en paramètre"
+			},
+			"response": {
+
+			"objet": "pokemon",
+			"message": "aucun pokemon corresspondant à l'id (fournit en pramètre)"
+		}
+		},
+
+		{
+			"name": "localhost:8000/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+						"formdata": [
+						{
+							"key": "national_number",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "total",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "hp",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "attack",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "defense",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "sp_atk",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "sp_def",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "speed",
+							"description": "",
+							"type": "number"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": {
+
+				"succés": {"message": "pokemon créé avec succés"},
+				"échec":  {"error message" : " description de l'erreur mysql.connector" }
+
+				}
+		},
+
+		{
+			"name": "localhost:8000/delete?id=5",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/delete?id=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"type": "int",
+							"required" : true
+
+						}
+					]
+				},
+				"description": "permet de supprimer un pokemon  donné: celui dont l'id est passé en paramètre"
+			},
+			"response": {
+				"succés": {
+					"message": {"message": "pokemon supprimé avec scuccés" }
+				    "échec": {"message" : "echec suppression pokemen"}
+			}
+		},
+		{
+			"name": "localhost:8000/update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "national_number",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "total",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "hp",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "attack",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "defense",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "sp_atk",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "sp_def",
+							"description": "",
+							"type": "number"
+						},
+						{
+							"key": "speed",
+							"description": "",
+							"type": "number"
+						},
+						{
+						   "key": "id",
+							"description": "identifiant  du pokemon",
+							"type": "int"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"update"
+					]
+				},
+				"description": "fait la mise d'un pokemon d'un pokemon donné: le champ id est saisi sur le formaulaire à des fin d'identification. mais en réamité il n'est pas lui même modifié"
+			},
+			"response": {
+				"message": "pokemon  mis à jour avec succès (on précise l'identifiant)"
+			}
+		}
+
+	]
+}
