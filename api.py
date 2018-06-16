@@ -11,7 +11,7 @@ cursor = cnx.cursor()
 # @hug.get('/')
 # def sayhello():
 #      return "Hello every body !"
-
+# ddd
 
 # Afficher tous les pokemon
 @hug.get('/getall')
